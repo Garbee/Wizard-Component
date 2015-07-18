@@ -62,16 +62,12 @@
                   <label class="mdl-textfield__label" for="shipping[name]">Name</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input class="mdl-textfield__input" type="text" id="shipping[address-line1]" />
-                  <label class="mdl-textfield__label" for="shipping[address-line1]">Address line 1</label>
+                  <input class="mdl-textfield__input" type="text" id="shipping[address]" />
+                  <label class="mdl-textfield__label" for="shipping[address]">Address line</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input class="mdl-textfield__input" type="text" id="shipping[address-line2]" />
-                  <label class="mdl-textfield__label" for="shipping[address-line2]">Address line 2</label>
-                </div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input class="mdl-textfield__input" type="text" id="shipping[postal-code]" />
-                  <label class="mdl-textfield__label" for="shipping[postal-code]">Postal/Zip code</label>
+                  <input class="mdl-textfield__input" type="text" id="shipping[zip]" />
+                  <label class="mdl-textfield__label" for="shipping[zip]">Postal/Zip code</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                   <input class="mdl-textfield__input" type="text" id="shipping[country]" />
@@ -90,33 +86,37 @@
                   <label class="mdl-textfield__label" for="billing[name]">Name</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input class="mdl-textfield__input" type="text" id="billing[address-line1]" />
-                  <label class="mdl-textfield__label" for="billing[address-line1]">Address line 1</label>
+                  <input class="mdl-textfield__input" type="text" id="billing[address]" />
+                  <label class="mdl-textfield__label" for="billing[address]">Address</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input class="mdl-textfield__input" type="text" id="billing[address-line2]" />
-                  <label class="mdl-textfield__label" for="billing[address-line2]">Address line 2</label>
-                </div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input class="mdl-textfield__input" type="text" id="billing[postal-code]" />
-                  <label class="mdl-textfield__label" for="billing[postal-code]">Postal/Zip code</label>
+                  <input class="mdl-textfield__input" type="text" id="billing[zip]" />
+                  <label class="mdl-textfield__label" for="billing[zip]">Postal/Zip code</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                   <input class="mdl-textfield__input" type="text" id="billing[country]" />
                   <label class="mdl-textfield__label" for="billing[country]">Country</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input class="mdl-textfield__input" type="text" id="billing[state]" />
-                  <label class="mdl-textfield__label" for="billing[state]">State</label>
+                  <input class="mdl-textfield__input" type="text" id="billing[region]" />
+                  <label class="mdl-textfield__label" for="billing[region]">State</label>
                 </div>
 
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input class="mdl-textfield__input" type="text" id="billing[cardnumber]" />
+                  <input class="mdl-textfield__input" type="text" id="billing[cardnumber]" pattern="^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|6(?:011|5[0-9]{2})[0-9]{12}|(?:2131|1800|35\d{3})\d{11})$" />
                   <label class="mdl-textfield__label" for="billing[cardnumber]">Card Number</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input class="mdl-textfield__input" type="text" id="billing[cvc]" />
+                  <input class="mdl-textfield__input" type="text" id="billing[cvc]" pattern="[0-9]"/>
                   <label class="mdl-textfield__label" for="billing[cvc]">CVC</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="billing[ccyear]" />
+                  <label class="mdl-textfield__label" for="billing[ccyear]">Card Expiration Year</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" pattern="" id="billing[ccmonth]" />
+                  <label class="mdl-textfield__label" for="billing[ccmonth]">Card Expiration Month</label>
                 </div>
             </fieldset>
         </div>
