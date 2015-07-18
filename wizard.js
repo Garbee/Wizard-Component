@@ -118,7 +118,7 @@ WizardComponent.prototype.next = function() {
   'use strict';
   var next = this.getNextStep_();
   if (next) {
-    this.goto(next.name);
+    this.goto(next.name, 'forward');
   }
 };
 
@@ -126,17 +126,27 @@ WizardComponent.prototype.previous = function() {
   'use strict';
   var previous = this.getPreviousStep_();
   if (previous) {
-    this.goto(previous.name);
+    this.goto(previous.name, 'backward');
   }
 };
 
-WizardComponent.prototype.goto = function(name) {
+WizardComponent.prototype.goto = function(name, direction) {
   'use strict';
   var target = this.getStepByName_(name);
   var current = this.getStepByName_(this.currentStep);
   this.deactive_(current);
   this.activate_(target);
-  // Fire moved event
+
+  var eventDetails = {
+      oldStep: current.name,
+      currentStep: target.name,
+    };
+  if (direction !== undefined && typeof direction === 'string') {
+    eventDetails.direction = direction;
+  }
+  this.element_.dispatchEvent(new CustomEvent('wizardMoved', {
+    detail: eventDetails
+  }));
 };
 
 WizardComponent.prototype.addStep = function(obj) {
