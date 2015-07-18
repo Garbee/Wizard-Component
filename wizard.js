@@ -28,6 +28,12 @@ WizardComponent.prototype.getFirstItem_ = function(target) {
   }
 };
 
+// Unused right now, but may come in handy later.
+// WizardComponent.prototype.getLastStep_ = function() {
+// 'use strict';
+// return this.steps[this.steps.length - 1];
+// };
+
 WizardComponent.prototype.getNextStep_ = function() {
   'use strict';
   var next = false;
