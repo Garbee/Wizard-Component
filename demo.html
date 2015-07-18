@@ -45,5 +45,84 @@
 
   <section>
     <h3>Complex Wizard</h3>
+    <form class="component-js-wizard component-wizard mdl-card mdl-shadow--4dp">
+        <ul class="wizard__steps">
+            <li class="wizard__step" data-wizard-step="shipping">Shipping</li>
+            <li class="wizard__step" data-wizard-step="billing">Billing</li>
+            <li class="wizard__step" data-wizard-step="review">Review</li>
+        </ul>
+        <div class="mdl-card__actions">
+            <button type="button" class="mdl-button mdl-js-button" data-wizard-button="previous">Previous</button>
+            <button type="button" class="mdl-button mdl-js-button" data-wizard-button="next">Next</button>
+        </div>
+        <div class="wizard__content" data-wizard-step="shipping">
+            <fieldset name="shipping">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="shipping[name]" />
+                  <label class="mdl-textfield__label" for="shipping[name]">Name</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="shipping[address-line1]" />
+                  <label class="mdl-textfield__label" for="shipping[address-line1]">Address line 1</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="shipping[address-line2]" />
+                  <label class="mdl-textfield__label" for="shipping[address-line2]">Address line 2</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="shipping[postal-code]" />
+                  <label class="mdl-textfield__label" for="shipping[postal-code]">Postal/Zip code</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="shipping[country]" />
+                  <label class="mdl-textfield__label" for="shipping[country]">Country</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="shipping[state]" />
+                  <label class="mdl-textfield__label" for="shipping[state]">State</label>
+                </div>
+            </fieldset>
+        </div>
+        <div class="wizard__content" data-wizard-step="billing">
+            <fieldset name="billing">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="billing[name]" />
+                  <label class="mdl-textfield__label" for="billing[name]">Name</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="billing[address-line1]" />
+                  <label class="mdl-textfield__label" for="billing[address-line1]">Address line 1</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="billing[address-line2]" />
+                  <label class="mdl-textfield__label" for="billing[address-line2]">Address line 2</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="billing[postal-code]" />
+                  <label class="mdl-textfield__label" for="billing[postal-code]">Postal/Zip code</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="billing[country]" />
+                  <label class="mdl-textfield__label" for="billing[country]">Country</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="billing[state]" />
+                  <label class="mdl-textfield__label" for="billing[state]">State</label>
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="billing[cardnumber]" />
+                  <label class="mdl-textfield__label" for="billing[cardnumber]">Card Number</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="billing[cvc]" />
+                  <label class="mdl-textfield__label" for="billing[cvc]">CVC</label>
+                </div>
+            </fieldset>
+        </div>
+        <div class="wizard__content" data-wizard-step="review">
+            <p>Review panel</p>
+        </div>
+    </form>
   </section>
 </main>
