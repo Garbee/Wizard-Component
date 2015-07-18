@@ -16,6 +16,18 @@
         width: 100%;
     }
 
+    .wizard__content .mdl-textfield {
+        width: 100%;
+    }
+
+    .wizard__content {
+        padding: 0;
+    }
+
+    .wizard__content.is-active {
+        padding: 16px;
+    }
+
 </style>
 
 <script src="node_modules/material-design-lite/material.js"></script>
@@ -122,6 +134,7 @@
         </div>
         <div class="wizard__content" data-wizard-step="review">
             <p>Review panel</p>
+            <button type="button" class="mdl-button mdl-js-button">Submit Order</button>
         </div>
     </form>
   </section>
