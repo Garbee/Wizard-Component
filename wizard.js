@@ -66,6 +66,19 @@ WizardComponent.prototype.getStepByName_ = function(name) {
   throw new Error('The step ' + name + ' is not registered.');
 };
 
+WizardComponent.prototype.activate_ = function(step) {
+  'use strict';
+  step.contentNode.classList.add(this.cssClasses.isActive);
+  step.contentNode.setAttribute('aria-hidden', false);
+  this.currentStep = step.name;
+};
+
+WizardComponent.prototype.deactive_ = function(step) {
+  'use strict';
+  step.contentNode.classList.remove(this.cssClasses.isActive);
+  step.contentNode.setAttribute('aria-hidden', true);
+};
+
 WizardComponent.prototype.init = function() {
   'use strict';
   var steps = this.element_.querySelectorAll('.' + this.cssClasses.step);
@@ -115,9 +128,8 @@ WizardComponent.prototype.goto = function(name) {
   'use strict';
   var target = this.getStepByName_(name);
   var current = this.getStepByName_(this.currentStep);
-  current.contentNode.classList.remove(this.cssClasses.isActive);
-  target.contentNode.classList.add(this.cssClasses.isActive);
-  this.currentStep = target.name;
+  this.deactive_(current);
+  this.activate_(target);
   // Fire moved event
 };
 
