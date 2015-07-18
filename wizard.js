@@ -113,9 +113,11 @@ WizardComponent.prototype.init = function() {
   '[data-wizard-button="next"]'
   ).addEventListener('click', this.next.bind(this));
 
-  this.element_.querySelector(
+  var previousButton = this.element_.querySelector(
       '[data-wizard-button="previous"]'
-  ).addEventListener('click', this.previous.bind(this));
+  );
+  previousButton.disabled = true;
+  previousButton.addEventListener('click', this.previous.bind(this));
 
 };
 
@@ -125,6 +127,10 @@ WizardComponent.prototype.next = function() {
   if (next) {
     this.goto(next.name, 'forward');
   }
+  var previousButton = this.element_.querySelector('[data-wizard-button="previous"]');
+  if (previousButton.disabled) {
+    previousButton.removeAttribute('disabled');
+  }
 };
 
 WizardComponent.prototype.previous = function() {
@@ -132,6 +138,9 @@ WizardComponent.prototype.previous = function() {
   var previous = this.getPreviousStep_();
   if (previous) {
     this.goto(previous.name, 'backward');
+  }
+  if (previous.name === this.getFirstItem_(this.steps).name) {
+    this.element_.querySelector('[data-wizard-button="previous"]').disabled = true;
   }
 };
 
