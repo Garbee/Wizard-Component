@@ -71,12 +71,20 @@ WizardComponent.prototype.activate_ = function(step) {
   step.contentNode.classList.add(this.cssClasses.isActive);
   step.contentNode.setAttribute('aria-hidden', false);
   this.currentStep = step.name;
+  this.element_.querySelector(
+    '.' + this.cssClasses.step +
+    '[data-wizard-step="' + step.contentNode.dataset.wizardStep + '"]'
+  ).classList.add(this.cssClasses.isActive);
 };
 
 WizardComponent.prototype.deactive_ = function(step) {
   'use strict';
   step.contentNode.classList.remove(this.cssClasses.isActive);
   step.contentNode.setAttribute('aria-hidden', true);
+  this.element_.querySelector(
+    '.' + this.cssClasses.step +
+    '[data-wizard-step="' + step.contentNode.dataset.wizardStep + '"]'
+    ).classList.remove(this.cssClasses.isActive);
 };
 
 WizardComponent.prototype.init = function() {
@@ -96,7 +104,10 @@ WizardComponent.prototype.init = function() {
   var firstStep = this.getFirstItem_(this.steps);
   firstStep.contentNode.classList.add(this.cssClasses.isActive);
   this.currentStep = firstStep.name;
-
+  this.element_.querySelector(
+          '.' + this.cssClasses.step +
+          '[data-wizard-step="' + firstStep.contentNode.dataset.wizardStep + '"]'
+          ).classList.add(this.cssClasses.isActive);
   // Hack the button handlers, do better later.
   this.element_.querySelector(
   '[data-wizard-button="next"]'
