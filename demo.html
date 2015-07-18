@@ -1,0 +1,70 @@
+<!doctype html>
+
+<meta charset="utf-8">
+<title>Wizard Component Demo</title>
+
+<link rel="stylesheet" href="node_modules/material-design-lite/material.css">
+
+<style>
+    main {
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    .mdl-card {
+        width: 100%;
+    }
+
+    .wizard__steps {
+        list-style:none;
+        padding: 0;
+    }
+
+    .wizard__step {
+        display: inline;
+    }
+
+    .wizard__content {
+        height: 0;
+        max-height: 0;
+        overflow:hidden;
+        transition: max-height 0.5s ease-out;
+    }
+
+    .wizard__content.is-active {
+        height: 100%;
+        max-height: 1500px;
+        transition: max-height 0.5s ease-in;
+    }
+
+</style>
+
+<script src="node_modules/material-design-lite/material.js"></script>
+<script src="wizard.js"></script>
+
+<main>
+  <section>
+    <h3>Simple Wizard</h3>
+    <div class="component-js-wizard component-wizard mdl-card mdl-shadow--4dp">
+        <ul class="wizard__steps">
+            <li class="wizard__step" data-wizard-step="1">Step 1</li>
+            <li class="wizard__step" data-wizard-step="2">Step 2</li>
+        </ul>
+        <div class="mdl-card__actions">
+            <button type="button" class="mdl-button mdl-js-button" data-wizard-button="previous">Previous</button>
+            <button type="button" class="mdl-button mdl-js-button" data-wizard-button="next">Next</button>
+        </div>
+        <div class="wizard__content" data-wizard-step="1">
+            <p>Content for the first step of the wizard.</p>
+        </div>
+        <div class="wizard__content" data-wizard-step="2">
+            <p>Content for the second step of the wizard.</p>
+        </div>
+    </div>
+  </section>
+
+
+  <section>
+    <h3>Complex Wizard</h3>
+  </section>
+</main>
