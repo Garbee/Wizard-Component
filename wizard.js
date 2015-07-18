@@ -132,6 +132,9 @@ WizardComponent.prototype.previous = function() {
 
 WizardComponent.prototype.goto = function(name, direction) {
   'use strict';
+  if (name === undefined) {
+    throw new Error('Please provide a step name to go to.');
+  }
   var target = this.getStepByName_(name);
   var current = this.getStepByName_(this.currentStep);
   this.deactive_(current);
