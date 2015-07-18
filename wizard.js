@@ -1,22 +1,16 @@
 function WizardComponent(element) {
   'use strict';
   this.element_ = element;
+  this.currentStep = undefined;
+  this.steps = [];
+  this.cssClasses = {
+    stepsContainer: 'wizard__steps',
+    step: 'wizard__step',
+    content: 'wizard__content',
+    isActive: 'is-active'
+  };
   this.init();
 }
-
-WizardComponent.prototype.cssClasses = {
-  stepsContainer: 'wizard__steps',
-  step: 'wizard__step',
-  content: 'wizard__content',
-  isActive: 'is-active'
-};
-
-/*
- * Currently registered steps in the process.
- */
-WizardComponent.prototype.steps = [];
-
-WizardComponent.prototype.currentStep = undefined;
 
 /*
 * Get the first item of an array or NodeList.
