@@ -157,7 +157,7 @@ WizardComponent.prototype.goto = function(name, direction) {
       targetStep: target,
     };
   if (direction !== undefined && typeof direction === 'string') {
-    eventDetails.direction = direction;
+    details.direction = direction;
   }
   var preEvent = new CustomEvent('wizardMoving', {
     detail: details
