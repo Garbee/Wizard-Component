@@ -3,14 +3,15 @@ function WizardComponent(element) {
   this.element_ = element;
   this.currentStep = undefined;
   this.steps = [];
-  this.cssClasses = {
-    stepsContainer: 'wizard__steps',
-    step: 'wizard__step',
-    content: 'wizard__content',
-    isActive: 'is-active'
-  };
   this.init();
 }
+
+WizardComponent.prototype.cssClasses = {
+  stepsContainer: 'wizard__steps',
+  step: 'wizard__step',
+  content: 'wizard__content',
+  isActive: 'is-active'
+};
 
 /*
 * Get the first item of an array or NodeList.
