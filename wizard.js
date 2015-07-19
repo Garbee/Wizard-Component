@@ -99,7 +99,7 @@ WizardComponent.prototype.init = function() {
           '.' + this.cssClasses.content +
           '[data-wizard-step="' + step.dataset.wizardStep + '"]'
           )
-    }
+    };
     this.steps.push(obj);
   }
   var firstStep = this.getFirstItem_(this.steps);
