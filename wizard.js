@@ -151,12 +151,28 @@ WizardComponent.prototype.goto = function(name, direction) {
   }
   var target = this.getStepByName_(name);
   var current = this.getStepByName_(this.currentStep);
+  var details = {
+      currentStep: current,
+      targetStep: target,
+    };
+  if (direction !== undefined && typeof direction === 'string') {
+    eventDetails.direction = direction;
+  }
+  var preEvent = new CustomEvent('wizardMoving', {
+    detail: details
+  });
+
+  this.element_.dispatchEvent(preEvent);
+  if (preEvent.defaultPrevented) {
+    return;
+  }
+
   this.deactive_(current);
   this.activate_(target);
 
   var eventDetails = {
-      oldStep: current.name,
-      currentStep: target.name,
+      oldStep: current,
+      currentStep: target,
     };
   if (direction !== undefined && typeof direction === 'string') {
     eventDetails.direction = direction;
