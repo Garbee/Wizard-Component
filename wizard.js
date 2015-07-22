@@ -3,6 +3,7 @@ function WizardComponent(element) {
   this.element_ = element;
   this.currentStep = undefined;
   this.steps = [];
+  this.stepNames = [];
   this.init();
 }
 
@@ -11,6 +12,23 @@ WizardComponent.prototype.cssClasses = {
   step: 'wizard__step',
   content: 'wizard__content',
   isActive: 'is-active'
+};
+
+WizardComponent.prototype.syncStepNames_ = function() {
+  'use strict';
+  this.stepsNames = [];
+  var target = this;
+  this.steps.forEach(function(item) {
+    target.stepNames.push(item.name);
+  });
+};
+
+WizardComponent.prototype.getStepPlace_ = function(stepName) {
+  'use strict';
+  if (typeof stepName !== 'string') {
+    throw new Error('Please provide the name of the step to get the placement of.');
+  }
+  return this.stepNames.indexOf(stepName);
 };
 
 /*
@@ -119,14 +137,14 @@ WizardComponent.prototype.init = function() {
   );
   previousButton.disabled = true;
   previousButton.addEventListener('click', this.previous.bind(this));
-
+  this.syncStepNames_();
 };
 
 WizardComponent.prototype.next = function() {
   'use strict';
   var next = this.getNextStep_();
   if (next) {
-    this.goto(next.name, 'forward');
+    this.goto(next.name);
   }
   var previousButton = this.element_.querySelector('[data-wizard-button="previous"]');
   if (previousButton.disabled) {
@@ -138,29 +156,38 @@ WizardComponent.prototype.previous = function() {
   'use strict';
   var previous = this.getPreviousStep_();
   if (previous) {
-    this.goto(previous.name, 'backward');
-  }
-  if (previous.name === this.getFirstItem_(this.steps).name) {
-    this.element_.querySelector('[data-wizard-button="previous"]').disabled = true;
+    this.goto(previous.name);
   }
 };
 
-WizardComponent.prototype.goto = function(name, direction) {
+WizardComponent.prototype.getDirectionTo_ = function(targetName) {
+  'use strict';
+  var targetPosition = this.getStepPlace_(targetName);
+  var currentPosition = this.getStepPlace_(this.currentStep);
+
+  if (targetPosition < currentPosition) {
+    return 'backward';
+  }
+
+  return 'forward';
+};
+
+WizardComponent.prototype.goto = function(name) {
   'use strict';
   if (name === undefined) {
     throw new Error('Please provide a step name to go to.');
   }
+  var direction = this.getDirectionTo_(name);
   var target = this.getStepByName_(name);
   var current = this.getStepByName_(this.currentStep);
-  var details = {
+  var preEvent = new CustomEvent('wizardMoving', {
+    detail: {
       currentStep: current,
       targetStep: target,
-    };
-  if (direction !== undefined && typeof direction === 'string') {
-    details.direction = direction;
-  }
-  var preEvent = new CustomEvent('wizardMoving', {
-    detail: details
+      direction: direction
+    },
+    cancelable: true,
+    bubbles: true
   });
 
   this.element_.dispatchEvent(preEvent);
@@ -171,15 +198,23 @@ WizardComponent.prototype.goto = function(name, direction) {
   this.deactive_(current);
   this.activate_(target);
 
-  var eventDetails = {
+  var previousButton = this.element_.querySelector('[data-wizard-button="previous"]');
+  if (direction === 'backward' && this.currentStep === this.getFirstItem_(this.steps).name) {
+    previousButton.disabled = true;
+  }
+
+  if (direction === 'forward') {
+    previousButton.removeAttribute('diabled');
+  }
+
+  this.element_.dispatchEvent(new CustomEvent('wizardMoved', {
+    detail: {
       oldStep: current,
       currentStep: target,
-    };
-  if (direction !== undefined && typeof direction === 'string') {
-    eventDetails.direction = direction;
-  }
-  this.element_.dispatchEvent(new CustomEvent('wizardMoved', {
-    detail: eventDetails
+      direction: direction
+    },
+    cancelable: true,
+    bubbles: true
   }));
 };
 
