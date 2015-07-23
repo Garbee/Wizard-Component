@@ -41,11 +41,10 @@ WizardComponent.prototype.getFirstItem_ = function(target) {
   }
 };
 
-// Unused right now, but may come in handy later.
-// WizardComponent.prototype.getLastStep_ = function() {
-// 'use strict';
-// return this.steps[this.steps.length - 1];
-// };
+WizardComponent.prototype.getLastStep_ = function() {
+'use strict';
+return this.steps[this.steps.length - 1];
+};
 
 WizardComponent.prototype.getNextStep_ = function() {
   'use strict';
@@ -180,7 +179,7 @@ WizardComponent.prototype.goto = function(name) {
   var direction = this.getDirectionTo_(name);
   var target = this.getStepByName_(name);
   var current = this.getStepByName_(this.currentStep);
-  var preEvent = new CustomEvent('wizardMoving', {
+  var preEvent = new CustomEvent('wizard-moving', {
     detail: {
       currentStep: current,
       targetStep: target,
@@ -207,15 +206,24 @@ WizardComponent.prototype.goto = function(name) {
     previousButton.removeAttribute('diabled');
   }
 
-  this.element_.dispatchEvent(new CustomEvent('wizardMoved', {
+  this.element_.dispatchEvent(new CustomEvent('wizard-moved', {
     detail: {
       oldStep: current,
       currentStep: target,
       direction: direction
     },
-    cancelable: true,
     bubbles: true
   }));
+
+  if(this.currentStep === this.getLastStep_().name) {
+    this.element_.dispatchEvent(new CustomEvent('wizard-onLastStep', {
+    detail: {,
+      step: target,
+      direction: direction
+    },
+    bubbles: true
+  }));
+  }
 };
 
 WizardComponent.prototype.addStep = function(obj) {
