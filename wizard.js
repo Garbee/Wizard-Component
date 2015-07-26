@@ -42,8 +42,8 @@ WizardComponent.prototype.getFirstItem_ = function(target) {
 };
 
 WizardComponent.prototype.getLastStep_ = function() {
-'use strict';
-return this.steps[this.steps.length - 1];
+  'use strict';
+  return this.steps[this.steps.length - 1];
 };
 
 WizardComponent.prototype.getNextStep_ = function() {
@@ -215,9 +215,9 @@ WizardComponent.prototype.goto = function(name) {
     bubbles: true
   }));
 
-  if(this.currentStep === this.getLastStep_().name) {
+  if (this.currentStep === this.getLastStep_().name) {
     this.element_.dispatchEvent(new CustomEvent('wizard-onLastStep', {
-    detail: {,
+    detail: {
       step: target,
       direction: direction
     },
@@ -227,10 +227,12 @@ WizardComponent.prototype.goto = function(name) {
 };
 
 WizardComponent.prototype.addStep = function(obj) {
+  'use strict';
   throw 'Not yet implemented';
 };
 
 WizardComponent.prototype.removeStep = function(obj) {
+  'use strict';
   throw 'Not yet implemented';
 };
 
