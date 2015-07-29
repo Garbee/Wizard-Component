@@ -171,15 +171,19 @@ WizardComponent.prototype.getDirectionTo_ = function(targetName) {
   return 'forward';
 };
 
-WizardComponent.prototype.goto = function(name) {
+WizardComponent.prototype.goto = function(name, fireEvents) {
   'use strict';
   if (name === undefined) {
     throw new Error('Please provide a step name to go to.');
   }
+  if (fireEvents === undefined) {
+    fireEvents = true;
+  }
   var direction = this.getDirectionTo_(name);
   var target = this.getStepByName_(name);
   var current = this.getStepByName_(this.currentStep);
-  var preEvent = new CustomEvent('wizard-moving', {
+  if (fireEvents) {
+    var preEvent = new CustomEvent('wizard-moving', {
     detail: {
       currentStep: current,
       targetStep: target,
@@ -189,11 +193,11 @@ WizardComponent.prototype.goto = function(name) {
     bubbles: true
   });
 
-  this.element_.dispatchEvent(preEvent);
-  if (preEvent.defaultPrevented) {
-    return;
+    this.element_.dispatchEvent(preEvent);
+    if (preEvent.defaultPrevented) {
+      return;
+    }
   }
-
   this.deactive_(current);
   this.activate_(target);
 
@@ -206,7 +210,8 @@ WizardComponent.prototype.goto = function(name) {
     previousButton.removeAttribute('diabled');
   }
 
-  this.element_.dispatchEvent(new CustomEvent('wizard-moved', {
+  if (fireEvents) {
+    this.element_.dispatchEvent(new CustomEvent('wizard-moved', {
     detail: {
       oldStep: current,
       currentStep: target,
@@ -214,7 +219,7 @@ WizardComponent.prototype.goto = function(name) {
     },
     bubbles: true
   }));
-
+  }
   if (this.currentStep === this.getLastStep_().name) {
     this.element_.dispatchEvent(new CustomEvent('wizard-onLastStep', {
     detail: {
