@@ -18,12 +18,12 @@
         ],
         "no-underscore-dangle": [
             0
-        ],
-        "globals": [
-            "componentHandler": true
         ]
     },
     "env": {
         "browser": true
+    },
+    "globals": {
+        "componentHandler": true
     }
 }
